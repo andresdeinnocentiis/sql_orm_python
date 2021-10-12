@@ -213,6 +213,17 @@ def modify(id, name):
     
     query_est = session.query(Estudiante).filter(Estudiante.id == id)
     estudiante = query_est.first()
+    print("QUERY EST FIRST: ",query_est.first())
+    while estudiante is None:
+        try:
+            id = int(input("El ID ingresado no coincide con un ID registrado en la Base de Datos, por favor ingrese un ID válido: "))
+            query_est = session.query(Estudiante).filter(Estudiante.id == id)
+            estudiante = query_est.first()
+        except:
+            ValueError("Error. Solamente puede ingresar un número de tipo INT.")
+            id = int(input("Ingrese un ID válido: "))  
+             
+    
     estudiante.tutor = tutor
     
     respuesta = f"Se ha actualizado al alumno con I.D.: {estudiante.id}, '{estudiante.name}'. Su nuevo tutor asignado es: '{tutor.name}'."
@@ -247,7 +258,7 @@ if __name__ == '__main__':
     print(search_by_tutor(tutor))
 
     nuevo_tutor = 'Lionel Messi'
-    id = 2
+    id = 24
     modify(id, nuevo_tutor)
 
     grade = 9
