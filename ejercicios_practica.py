@@ -213,7 +213,7 @@ def modify(id, name):
     
     query_est = session.query(Estudiante).filter(Estudiante.id == id)
     estudiante = query_est.first()
-    print("QUERY EST FIRST: ",query_est.first())
+    
     while estudiante is None:
         try:
             id = int(input("El ID ingresado no coincide con un ID registrado en la Base de Datos, por favor ingrese un ID válido: "))
